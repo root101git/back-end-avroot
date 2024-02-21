@@ -20,13 +20,15 @@ origins = [
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-    
+@app.get("/hii/{inte}")
+def index(inte :int):
+    return inte
+        
 @app.get('/hey')
 async def index():
     return {"data":"rohan"}

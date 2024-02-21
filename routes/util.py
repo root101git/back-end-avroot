@@ -4,6 +4,7 @@ import tensorflow as tf
 import pandas as pd
 import shutil
 import os
+
 from fastapi.responses import JSONResponse
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -20,12 +21,10 @@ async def PredictAns(photo:UploadFile):
         with open(file_path, "wb") as i:
             shutil.copyfileobj(photo.file, i)
         
-        model = load_model(os.path.join(current_dir, 'models/model_inception.h5'))
-        IMAGE_SIZE=(224,224)
+        model = load_model(os.path.join(current_dir, 'models/inception4.h5'))
+      
 
-        img = image.load_img(file_path,target_size=(224,224))   
-
-    
+        img = image.load_img(file_path,target_size=(299,299))   
         x=  image.img_to_array(img)   
         x=x/255
         x=np.expand_dims(x,axis=0)
