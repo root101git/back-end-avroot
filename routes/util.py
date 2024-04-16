@@ -35,7 +35,7 @@ async def PredictAns(photo:UploadFile):
         df = pd.read_csv(os.path.join(current_dir, 'new.csv'))
         ans = df[df['index'] == a ].values[0][1]
         os.remove(file_path)
-        return str(ans)
+        return JSONResponse(content={"plantName":ans})
     except Exception as e:
         return JSONResponse(content={e})
     
